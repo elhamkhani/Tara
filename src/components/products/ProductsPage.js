@@ -1,60 +1,45 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import * as productActions from '../../redux/actions/productAction';
-import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
+import Product from './Product';
 
-class ProductsPage extends React.Component {
-	state = {
-		product: {
-			name: ''
+export default function ProductsPage() {
+	const products = [
+		{
+			id: 1,
+			name: 'Talk Docker to Me Tour',
+			price: 49.99,
+			imgUrl: 'logos/Container-Enthusiasm-TalkDocker-To-Me.png',
+			quantity: 3
+		},
+		{
+			id: 2,
+			name: 'Binary Bovine Tour',
+			price: 59.99,
+			imgUrl: 'logos/DigitalCowboys_BinaryBovine.png',
+			quantity: 4
+		},
+		{
+			id: 3,
+			name: 'Code Empire Tour',
+			price: 39.99,
+			imgUrl: 'logos/GitOuttaMyHub-CodeEmpire.png',
+			quantity: 8
+		},
+		{
+			id: 4,
+			name: 'For Those About to Block Tour',
+			price: 69.99,
+			imgUrl:
+				'logos/Network-Firewall-Squad---For-Those-About-to-Block,-We-Salute-You.png',
+			quantity: 1
 		}
-	};
-
-	handleChange = (event) => {
-		const product = { ...this.state.product, name: event.target.value };
-		this.setState({ product });
-	};
-
-	handleSubmit = (event) => {
-		event.preventDefault();
-
-		this.props.actions.createProduct(this.state.product);
-	};
-	render() {
-		return (
-			<form onSubmit={this.handleSubmit}>
-				<h2>products</h2>
-				<h3>Add product</h3>
-				<input
-					type="text"
-					onChange={this.handleChange}
-					value={this.state.product.name}
-				></input>
-
-				<input type="submit" value="Save"></input>
-				{this.props.products.map((product) => (
-					<div key={product.name}>{product.name}</div>
-				))}
-			</form>
-		);
-	}
+	];
+	return (
+		<div>
+			{products.map((product) => (
+				<Product product={product} key={product.id} />
+			))}
+		</div>
+	);
 }
 
-ProductsPage.propTypes = {
-	actions: PropTypes.object.isRequired,
-	products: PropTypes.array.isRequired
-};
-
-function mapStateToProps(state) {
-	return {
-		products: state.products
-	};
-}
-
-function mapDispatchToProps(dispatch) {
-	return {
-		actions: bindActionCreators(productActions, dispatch)
-	};
-}
-export default connect(mapStateToProps, mapDispatchToProps)(ProductsPage);
+ProductsPage.propTypes = {};

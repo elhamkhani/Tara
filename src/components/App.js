@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import HomePage from './home/HomePage';
 import AboutPage from './about/AboutPage';
 import ProductsPage from './products/ProductsPage';
@@ -10,12 +10,12 @@ function App() {
 	return (
 		<div className="container-fluid">
 			<Header></Header>
-			<Switch>
-				<Route exact path="/" component={HomePage} />
-				<Route path="/about" component={AboutPage} />
-				<Route path="/products" component={ProductsPage} />
-				<Route component={PageNotFound} />
-			</Switch>
+			<Routes>
+				<Route path="/" element={<HomePage />} />
+				<Route path="/about" element={<AboutPage />} />
+				<Route path="/products" element={<ProductsPage />} />
+				<Route element={<PageNotFound />} />
+			</Routes>
 		</div>
 	);
 }
